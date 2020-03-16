@@ -1,4 +1,4 @@
-import { Controller, Get, HttpException } from '@nestjs/common';
+import { Controller, Get, HttpException, UseGuards } from '@nestjs/common';
 import { DemoService } from './demo.service';
 import {
   ApiTags,
@@ -6,9 +6,11 @@ import {
   ApiOperation,
   ApiOkResponse,
 } from '@nestjs/swagger';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @Controller('demo')
 @ApiTags('Demo')
+@UseGuards(new AuthGuard())
 export class DemoController {
   constructor(private readonly demoService: DemoService) {}
 
