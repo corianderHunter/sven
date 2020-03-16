@@ -20,4 +20,13 @@ export class DemoController {
   getHello(): string {
     return this.demoService.getHello();
   }
+
+  @Get('/config')
+  @ApiOperation({
+    summary: 'get config',
+    operationId: 'getConfig',
+  })
+  getConfig(): Object {
+    return this.demoService.getConfig();
+  }
 }

@@ -7,11 +7,15 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
 import { version } from '../package.json';
+import { BunyanLoggerService } from './logger/logger.service';
 
 async function bootstrap() {
+  const logger = new BunyanLoggerService();
+
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(),
+    { logger },
   );
 
   const configService = app.get('ConfigService');
@@ -21,7 +25,7 @@ async function bootstrap() {
 
   if (useSwaggerDoc) {
     const options = new DocumentBuilder()
-      .setTitle('Cats example')
+      .setTitle('Sven example')
       .setDescription('The Sven API description')
       .setVersion(version)
       .build();
