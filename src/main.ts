@@ -4,10 +4,14 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import * as compression from 'compression';
 
 import { AppModule } from './app.module';
 import { version } from '../package.json';
 import { BunyanLoggerService } from './logger/logger.service';
+import { ResponseInterceptor } from './interceptors/response.interceptor';
+import { UncaughtExceptionsFilter } from './exceptions/uncaught-exception-filter';
+import { HttpExceptionFilter } from './exceptions/http';
 
 async function bootstrap() {
   const logger = new BunyanLoggerService();
@@ -17,6 +21,11 @@ async function bootstrap() {
     new FastifyAdapter(),
     { logger },
   );
+
+  app.use(compression());
+  app.useGlobalInterceptors(new ResponseInterceptor());
+  app.useGlobalFilters(new UncaughtExceptionsFilter());
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   const configService = app.get('ConfigService');
 

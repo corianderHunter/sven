@@ -27,6 +27,7 @@
     "@nestjs/swagger": "^4.4.0",
     "bunyan": "^1.8.12",
     "bunyan-format": "^0.2.1",
+    "compression": "^1.7.4",
     "fastify-swagger": "^2.5.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

@@ -9,9 +9,7 @@ export class DemoService {
     return 'Hello World!';
   }
 
-  getConfig(): object {
-    const test = this.configService.get('SWAGGER_DOC');
-    console.log(test);
-    return { test: 'Hello World!' };
+  getConfig(): ConfigService {
+    return this.configService;
   }
 }
