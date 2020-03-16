@@ -10,6 +10,13 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter(),
   );
-  await app.listen(3000);
+
+  const configService = app.get('ConfigService');
+
+  const port = configService.get('PORT');
+  const useSwaggerDoc = configService.get('SWAGGER_DOC:') === 'TRUE';
+
+  await app.listen(port || 3000);
 }
+
 bootstrap();
