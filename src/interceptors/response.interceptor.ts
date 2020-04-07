@@ -17,7 +17,6 @@ export interface Response<T> {
 export const RESULT_CODE = {
   SUCCESS: 0,
   ERROR: 1,
-  TOKEN_INVALID: 1012,
 };
 
 /**
